@@ -5,36 +5,34 @@ using namespace std;
 
 void six_ball()
 {
-
-	ntake(0.1, true);
-	pros::delay(50);
-
+	// release intake, intake ball and drive back
 	intake.move_voltage(12000);
 	drive_pid(4.7);
+	turn_pid(-5);
 	maxSpeed = 90;
 	turn_maxSpeed = 95;
-	drive_pid(-21.5);
+	drive_pid(-21.5);// 20
 	maxSpeed = 95;
 	intake.move_voltage(0);
-
+	// descore and score
 	backwings.set_value(true);
 	curve_maxSpeed = 85;
-	curve_pid(-65, 0.1, 0.06, true);
+	curve_pid(-70, 0.1, 0.08, true);
 	backwings.set_value(false);
 	drive_pid(-6);
 	turn_pid(-75);
 	drive_pid(-8);
-
+	// turn around and score
 	drive_pid(7);
-	intake.move_voltage(-12000);
 	turn_pid(-255);
+	intake.move_voltage(-12000);
 	maxSpeed = 100;
-	drive_pid(8);
+	drive_pid(10);
 	maxSpeed = 90;
 	intake.move_voltage(0);
-
-	drive_pid(-7);
-	turn_pid(-340);
+	// drive to mid and score
+	drive_pid(-10);
+	turn_pid(-340); // 310
 	intake.move_voltage(12000);
 	drive_pid(29);
 	turn_pid(-210);
@@ -45,12 +43,12 @@ void six_ball()
 	turn_pid(-200);
 	drive_pid(-10);
 	pros::delay(100);
-
-	turn_pid(-310);
+	// turn to intake
+	turn_pid(-306);
 	intake.move_voltage(12000);
 	drive_pid(7);
-
-	turn_pid(-170);
+	// score last two tri-balls
+	turn_pid(-175);
 	intake.move_voltage(-12000);
 	leftwing.set_value(true);
 	rightwing.set_value(true);
@@ -63,119 +61,122 @@ void six_ball()
 
 void rush_far_winpoint()
 {
-	maxSpeed = 100;
-	turn_maxSpeed = 95;
-	curve_maxSpeed = 90;
-
-	ntake(0.1, true);
-
-	rightwing.set_value(true);
-	pros::delay(100);
-	rightwing.set_value(false);
-
-	turn_pid(-23.5);
-	intake.move_voltage(8500);
-
-	left_drive.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
-	right_drive.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
-	drive_pid(27.4);
-	left_drive.set_brake_modes(pros::E_MOTOR_BRAKE_BRAKE);
-	right_drive.set_brake_modes(pros::E_MOTOR_BRAKE_BRAKE);
-	drive_pid(-31.5);
-	maxSpeed = 90;
-	intake.move_voltage(0);
-
-	intake.move_voltage(-12000);
-	turn_pid(42);
-	pros::delay(50);
-	turn_pid(-91);
+	maxSpeed = 127;
+	turn_maxSpeed = 127;
+	curve_maxSpeed = 127;
+	// release intake
 	intake.move_voltage(12000);
-	drive_pid(20);
-	turn_pid(-92);
+	// turn to middle
+	turn_pid(-26.5);
+	// hit tri-ball with back wings and intake
+	drive_pid(-26.5);
+	rightwing.set_value(true);
+	turn_pid(120);
+	rightwing.set_value(false);
+	drive_pid(10);
+	// drive back to corner and outtake
+	turn_pid(155);
+	intake.move_voltage(0);
+	drive_pid(-37);
+	turn_pid(225);
+	intake.move_voltage(-12000);
+	pros::delay(200);
+	turn_pid(80);
+	intake.move_voltage(12000);
+	// intake ball
+	drive_pid(17);
+	turn_pid(85);
 	drive_pid(-22);
 	intake.move_voltage(0);
-
+	// descore and score
 	backwings.set_value(true);
-	curve_pid(-160, 0.1, 0.07, true);
+	curve_pid(20, 0.1, 0.08, true);
 	backwings.set_value(false);
-	pros::delay(250);
-	turn_pid(-140);
-	drive_pid(-6);
-	turn_pid(-165);
+	turn_pid(40);
+	drive_pid(-8);
+	turn_pid(15);
 	drive_pid(-10);
-
+	// turn around and score
 	drive_pid(7);
-	turn_pid(-342);
+	turn_pid(-162);
 	intake.move_voltage(-12000);
-	maxSpeed = 127;
-	drive_pid(11);
+	drive_pid(9);
 	pros::delay(50);
-	maxSpeed = 100;
 	intake.move_voltage(0);
-
-	drive_pid(-7);
-	turn_pid(-429);
+	// drive to middle and score
+	drive_pid(-9);
+	turn_pid(-252);
 	intake.move_voltage(12000);
 	drive_pid(29);
-	turn_pid(-310);
-	drive_pid(14);
-	turn_pid(-270);
+	turn_pid(-128);
 	intake.move_voltage(-12000);
-	maxSpeed = 127;
-	drive_pid(6);
-	turn_pid(-280);
+	leftwing.set_value(true);
+	drive_pid(21);
 	drive_pid(-10);
-	pros::delay(100);
-}
-void close_winpoint()
-{
-	ntake(0.1, true);
 
+}
+void close_winpoint(){
+	maxSpeed = 50;
+	turn_maxSpeed = 75;
+
+	intake.move_voltage(-12000);
+	backwings.set_value(true);
+	pros::delay(250);
+	turn_pid(-60);
+	pros::delay(250);
+	backwings.set_value(false);
+	turn_pid(5);
+
+	drive_pid(8);
+	turn_pid(-40);
+
+	drive_pid(7);
+	leftwing.set_value(true);
+	drive_pid(8);
+
+}
+
+void close_disrupt()
+{	
+	curve_maxSpeed = 60;
+	intake.move_voltage(12000);
 	turn_maxSpeed = 90;
 	turn_pid(22.5);
-	intake.move_voltage(12000);
 
 	maxSpeed = 127;
-	left_drive.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
-	right_drive.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
-	drive_pid(27);
-	maxSpeed = 95; // optional
-	left_drive.set_brake_modes(pros::E_MOTOR_BRAKE_BRAKE);
-	right_drive.set_brake_modes(pros::E_MOTOR_BRAKE_BRAKE);
-	drive_pid(-2);
+	drive_pid(28);
+	maxSpeed = 95;
+	drive_pid(-1.5);
 
 	turn_pid(92);
-	intake.move_voltage(0);
 	leftwing.set_value(true);
 	drive_pid(12);
 	leftwing.set_value(false);
 
 	maxSpeed = 65;
-	turn_pid(45);
-	drive_pid(-27);
+	turn_pid(43);
+	drive_pid(-29);
 
 	backwings.set_value(true);
 	curve_maxSpeed = 80;
-	curve_pid(-58, 0.1, 0.1, true);
+	curve_pid(-62, 0.1, 0.1, true);
 	backwings.set_value(false);
 	pros::delay(250);
 	drive_pid(-5);
 	turn_pid(-80);
 
-	drive_pid(-10);
+	drive_pid(-8);
 	turn_pid(-270);
 
 	maxSpeed = 60;
 	rightwing.set_value(true);
 	intake.move_voltage(-12000);
-	drive_pid(12);
+	drive_pid(11);
 	pros::delay(200);
-
-	// ELIMS ONLY: Set up in corner for bowling
-
-	// drive_pid(-25);
-	// turn_pid(-250);
-	// backwings.set_value(true);
+	
+	drive_pid(-25);
+	turn_pid(-250);
+	backwings.set_value(true);
 }
 
 void skills()
@@ -270,10 +271,6 @@ void skills()
 
 void test()
 {
-	imu1.set_rotation(0);
-	imu2.set_rotation(0);
-	// drive_pid(-31);
-	// drive_pid(12);
-
-	turn_pid(90);
+	drive_pid(-31);
+	drive_pid(12);
 }

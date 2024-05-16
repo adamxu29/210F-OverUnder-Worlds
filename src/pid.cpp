@@ -215,7 +215,7 @@ double prevError = 0;
 double integral = 0;
 double derivative = 0;
 
-double tolerance = 10;
+double tolerance = 15;
 double maxSpeed = 75;
 
 void drive_pid(double target)

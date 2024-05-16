@@ -59,7 +59,7 @@ void disabled() {}
  * starts.
  */
 
-hang.set_value(false);
+
 void competition_initialize() {}
 
 /**
@@ -83,6 +83,7 @@ void autonomous()
 	// six_ball();
 	rush_far_winpoint();
 	// close_winpoint();
+	// close_disrupt();
 	// test();
 }
 /**
@@ -104,8 +105,13 @@ void opcontrol()
 	right_drive.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
 	while (true)
 	{
-		double left_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) + controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-		double right_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) - controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+		// Two Stick Arcade
+		// double left_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) + controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+		// double right_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) - controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+		
+		// Tank
+		double left_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+		doublt right_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y;)
 
 		left_drive.move_voltage(left_power * (12000.0 / 127));
 		right_drive.move_voltage(right_power * (12000.0 / 127));
